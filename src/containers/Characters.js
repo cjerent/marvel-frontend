@@ -35,7 +35,7 @@ const Characters = () => {
         {
           params: {
             skip: page,
-            apiKey: "BJPyqfURjLWejOS8",
+            apiKey: process.env.REACT_APP_API_KEY,
             name: search,
           },
         }
