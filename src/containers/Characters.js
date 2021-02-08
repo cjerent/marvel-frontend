@@ -58,7 +58,7 @@ const Characters = () => {
           <div className="searchbar-container">
             <FontAwesomeIcon className="search-icon" icon="search" />
             <DebounceInput
-              minLength={4}
+              minLength={1}
               debounceTimeout={100}
               className="search-bar"
               type="text"

@@ -52,7 +52,7 @@ const Comics = () => {
           <div className="searchbar-container">
             <FontAwesomeIcon className="search-icon" icon="search" />
             <DebounceInput
-              minLength={3}
+              minLength={1}
               debounceTimeout={100}
               className="search-bar"
               type="text"
