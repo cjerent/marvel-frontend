@@ -11,12 +11,15 @@ const Characters = () => {
   const [isLoading, setIsloading] = useState(true);
   const [page, setPage] = useState(0);
   const [search, setSearch] = useState("");
+
   const imgExtensionJpg = "portrait_uncanny.jpg";
   const imgExtensionGif = "portrait_uncanny.gif";
   const imgExtensionPng = "portrait_uncanny.png";
 
   const end = page === 0;
   const endNext = page === 1400;
+
+  const onChange = (event) => setData(event.target.value);
 
   const handleNext = (e) => {
     e.preventDefault();
@@ -26,6 +29,10 @@ const Characters = () => {
   const handlePrev = (e) => {
     e.preventDefault();
     setPage(page - 100);
+  };
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
   };
 
   useEffect(() => {
@@ -58,18 +65,19 @@ const Characters = () => {
           <div className="searchbar-container">
             <FontAwesomeIcon className="search-icon" icon="search" />
             <DebounceInput
+              value={data.name}
               minLength={1}
-              debounceTimeout={100}
+              debounceTimeout={200}
               className="search-bar"
               type="text"
               placeholder="Recherche ton personnage"
-              onChange={(event) => setSearch(event.target.value)}
+              onChange={handleSearch}
             />
           </div>
           <div className="cards-container">
             {data.map((item) => {
               const name = item.name;
-
+              const id = item._id;
               const description = item.description;
 
               let img;
@@ -82,27 +90,23 @@ const Characters = () => {
               }
 
               return (
-                <>
-                  <div key={item._id} className="card">
-                    <div className="card-title">
-                      <h2>{name}</h2>
-                    </div>
-                    <div className="img-container">
-                      <img src={img} alt={name} />
-                    </div>
-                    <div className="text">
-                      <p>
-                        {description}
-                        <br />{" "}
-                        <button
-                          onClick={() => history.push(`comics/${item._id}`)}
-                        >
-                          Découvrez ses Comics
-                        </button>
-                      </p>
-                    </div>
+                <div key={name} className="card">
+                  <div className="card-title">
+                    <h2>{name}</h2>
                   </div>
-                </>
+                  <div className="img-container">
+                    <img src={img} alt={name} />
+                  </div>
+                  <div className="text">
+                    <p>
+                      {description}
+                      <br />{" "}
+                      <button onClick={() => history.push(`comics/${id}`)}>
+                        Découvrez ses Comics
+                      </button>
+                    </p>
+                  </div>
+                </div>
               );
             })}
           </div>

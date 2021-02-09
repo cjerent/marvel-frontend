@@ -1,10 +1,11 @@
 import React from "react";
-import cover from "../assets/cover.jpg";
+
+import cover2 from "../assets/cover-marvel.jpg";
 
 const Home = () => {
   return (
     <div className="cover">
-      <img src={cover} alt="marvel-vilain" />
+      <img src={cover2} alt="marvel-vilain" />
     </div>
   );
 };

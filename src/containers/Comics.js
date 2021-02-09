@@ -24,6 +24,10 @@ const Comics = () => {
     e.preventDefault();
     setPage(page - 100);
   };
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
@@ -52,18 +56,20 @@ const Comics = () => {
           <div className="searchbar-container">
             <FontAwesomeIcon className="search-icon" icon="search" />
             <DebounceInput
+              value={data.title}
               minLength={1}
               debounceTimeout={100}
               className="search-bar"
               type="text"
               placeholder="Recherche tes comics"
-              onChange={(event) => setSearch(event.target.value)}
+              onChange={handleSearch}
             />
           </div>
           <div className="cards-container">
             {data.map((item) => {
               const name = item.title;
               const description = item.description;
+              const comicsId = item._id;
               let img;
               if (item.thumbnail.extension === "jpg") {
                 img = item.thumbnail.path + "/" + imgExtensionJpg;
@@ -72,7 +78,7 @@ const Comics = () => {
               }
 
               return (
-                <div key={item._id} className="card">
+                <div key={comicsId} className="card">
                   <div className="card-title">
                     <h2>{name}</h2>
                   </div>
